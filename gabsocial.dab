@@ -1,0 +1,142 @@
+{
+  "Services": {
+    "db": {
+      "Image": "postgres@sha256:de3efddbc71dbdbf236fae5abda26cbac68204cb2410be5be3a12bfe2da9a871", 
+      "Networks": [
+        "internal_network"
+      ]
+    }, 
+    "redis": {
+      "Image": "redis@sha256:a6d1a88fc04782573b49d1b16c1399f9af3e488cdae4ee2eeafe5383e15b2539", 
+      "Networks": [
+        "internal_network"
+      ]
+    }, 
+    "sidekiq": {
+      "Args": [
+        "bundle", 
+        "exec", 
+        "sidekiq"
+      ], 
+      "Env": [
+        "SMTP_DELIVERY_METHOD=sendmail", 
+        "DB_PORT=5432", 
+        "TRUSTED_PROXY_IP=172.16.0.67", 
+        "SMTP_FROM_ADDRESS=notifications@protohype.net", 
+        "LOCAL_DOMAIN=gab.protohype.net", 
+        "VAPID_PUBLIC_KEY=BAqc6wZxlFd-OuO62W51BI6OdGQ_8WDFVKkGssz4gKXYHcYrf-5ygVZ5HjKyaqFu9RgsfuYcjBKG7_5hC66RO0I=", 
+        "SMTP_OPENSSL_VERIFY_MODE=none", 
+        "DEFAULT_LOCALE=en", 
+        "SMTP_PORT=587", 
+        "SMTP_SERVER=172.16.0.67", 
+        "DB_USER=gabsocial", 
+        "SECRET_KEY_BASE=GRIBBLEGRIBBLE", 
+        "REDIS_HOST=redis", 
+        "DB_PASS=mufo29.!", 
+        "DB_NAME=gabsocial_alt", 
+        "REDIS_PORT=6379", 
+        "UID=1001", 
+        "SMTP_DOMAIN=protohype.net", 
+        "OTP_SECRET=ccf626e77ac9758a345e9a2fba6aa52c3ae8c0f56fc5accd8987bbc53be706c68b48336f7ed2ebc4151e751c3ab92a13ab7663e9751587cc81b71f40aa92ce05", 
+        "GID=1001", 
+        "DB_HOST=172.16.0.67", 
+        "VAPID_PRIVATE_KEY=IavQoEkSBn0SuonP7fZ_DNj3biN94mjUoPYDeiSFSWE=", 
+        "SMTP_AUTH_METHOD=none", 
+        "STREAMING_CLUSTER_NUM=1"
+      ], 
+      "Image": "elkabong/gabsocial@sha256:ccb62e0f3f5de7e05c06ca43e24cbf083eabee4b5bd6a92947e468f5347824b5", 
+      "Networks": [
+        "internal_network", 
+        "external_network"
+      ]
+    }, 
+    "streaming": {
+      "Args": [
+        "yarn", 
+        "start"
+      ], 
+      "Env": [
+        "SMTP_DELIVERY_METHOD=sendmail", 
+        "DB_PORT=5432", 
+        "TRUSTED_PROXY_IP=172.16.0.67", 
+        "SMTP_FROM_ADDRESS=notifications@protohype.net", 
+        "LOCAL_DOMAIN=gab.protohype.net", 
+        "VAPID_PUBLIC_KEY=BAqc6wZxlFd-OuO62W51BI6OdGQ_8WDFVKkGssz4gKXYHcYrf-5ygVZ5HjKyaqFu9RgsfuYcjBKG7_5hC66RO0I=", 
+        "SMTP_OPENSSL_VERIFY_MODE=none", 
+        "DEFAULT_LOCALE=en", 
+        "SMTP_PORT=587", 
+        "SMTP_SERVER=172.16.0.67", 
+        "DB_USER=gabsocial", 
+        "SECRET_KEY_BASE=GRIBBLEGRIBBLE", 
+        "REDIS_HOST=redis", 
+        "DB_PASS=mufo29.!", 
+        "DB_NAME=gabsocial_alt", 
+        "REDIS_PORT=6379", 
+        "UID=1001", 
+        "SMTP_DOMAIN=protohype.net", 
+        "OTP_SECRET=ccf626e77ac9758a345e9a2fba6aa52c3ae8c0f56fc5accd8987bbc53be706c68b48336f7ed2ebc4151e751c3ab92a13ab7663e9751587cc81b71f40aa92ce05", 
+        "GID=1001", 
+        "DB_HOST=172.16.0.67", 
+        "VAPID_PRIVATE_KEY=IavQoEkSBn0SuonP7fZ_DNj3biN94mjUoPYDeiSFSWE=", 
+        "SMTP_AUTH_METHOD=none", 
+        "STREAMING_CLUSTER_NUM=1"
+      ], 
+      "Image": "elkabong/gabsocial@sha256:ccb62e0f3f5de7e05c06ca43e24cbf083eabee4b5bd6a92947e468f5347824b5", 
+      "Networks": [
+        "internal_network", 
+        "external_network"
+      ], 
+      "Ports": [
+        {
+          "Port": 4000, 
+          "Protocol": "tcp"
+        }
+      ]
+    }, 
+    "web": {
+      "Args": [
+        "bash", 
+        "-c", 
+        "rm -f /gabsocial/tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
+      ], 
+      "Env": [
+        "SMTP_DELIVERY_METHOD=sendmail", 
+        "DB_PORT=5432", 
+        "TRUSTED_PROXY_IP=172.16.0.67", 
+        "SMTP_FROM_ADDRESS=notifications@protohype.net", 
+        "LOCAL_DOMAIN=gab.protohype.net", 
+        "VAPID_PUBLIC_KEY=BAqc6wZxlFd-OuO62W51BI6OdGQ_8WDFVKkGssz4gKXYHcYrf-5ygVZ5HjKyaqFu9RgsfuYcjBKG7_5hC66RO0I=", 
+        "SMTP_OPENSSL_VERIFY_MODE=none", 
+        "DEFAULT_LOCALE=en", 
+        "SMTP_PORT=587", 
+        "SMTP_SERVER=172.16.0.67", 
+        "DB_USER=gabsocial", 
+        "SECRET_KEY_BASE=GRIBBLEGRIBBLE", 
+        "REDIS_HOST=redis", 
+        "DB_PASS=mufo29.!", 
+        "DB_NAME=gabsocial_alt", 
+        "REDIS_PORT=6379", 
+        "UID=1001", 
+        "SMTP_DOMAIN=protohype.net", 
+        "OTP_SECRET=ccf626e77ac9758a345e9a2fba6aa52c3ae8c0f56fc5accd8987bbc53be706c68b48336f7ed2ebc4151e751c3ab92a13ab7663e9751587cc81b71f40aa92ce05", 
+        "GID=1001", 
+        "DB_HOST=172.16.0.67", 
+        "VAPID_PRIVATE_KEY=IavQoEkSBn0SuonP7fZ_DNj3biN94mjUoPYDeiSFSWE=", 
+        "SMTP_AUTH_METHOD=none", 
+        "STREAMING_CLUSTER_NUM=1"
+      ], 
+      "Image": "elkabong/gabsocial@sha256:ccb62e0f3f5de7e05c06ca43e24cbf083eabee4b5bd6a92947e468f5347824b5", 
+      "Networks": [
+        "internal_network", 
+        "external_network"
+      ], 
+      "Ports": [
+        {
+          "Port": 3000, 
+          "Protocol": "tcp"
+        }
+      ]
+    }
+  }, 
+  "Version": "0.1"
+}
