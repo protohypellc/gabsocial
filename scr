@@ -1,0 +1,4 @@
+#!/bin/bash
+gem2.5 install active_record_schema
+gem2.5 install nio4r
+gem2.5 install rails
